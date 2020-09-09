@@ -1,0 +1,49 @@
+body {
+    background-image: url(../images/books.jpeg);
+    font-family: "ITC Serif Gothic", Lato;
+  }
+
+  #siteName {
+    font-size: 30px;
+    color: whitesmoke;
+  }
+    #header {
+        text-align: center;
+        color:white;
+        text-shadow: 2px 2px lightslategray;
+        padding: 15px;
+    }
+    
+    .namePlate {
+        font-size: 25px;
+        text-align: center;
+        /*padding:5px;*/
+    }
+  
+    .figure {
+        text-align: center;
+        background-color: rgb(255, 235, 205, 0.8);
+        /*border: 2px solid black;*/
+        color: black;
+        padding: 10px;
+       /* width: 500px;*/
+        display: block;
+    }
+  
+   .Pics{
+      height: 300px;
+      width: 300px;
+      margin: auto;
+      display: block;
+      padding: 5px;
+  }
+    
+  .logo {
+    width: 30px;
+  }
+
+  .booksearch {
+    background-color: rgb(119, 136, 153, 0.8);
+    width: 70%;
+    
+  }
