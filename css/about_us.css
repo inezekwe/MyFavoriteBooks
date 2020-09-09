@@ -43,7 +43,10 @@ body {
   }
 
   .booksearch {
-    background-color: rgb(119, 136, 153, 0.8);
-    width: 70%;
-    
+    background-color: rgb(119, 136, 153, 0.9);
+    width: 60%;
   }
+
+#bookSelection {
+    width: max-content;
+}
