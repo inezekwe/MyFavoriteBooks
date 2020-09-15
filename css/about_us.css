@@ -3,47 +3,76 @@ body {
     font-family: "ITC Serif Gothic", Lato;
   }
 
-  #siteName {
+#siteName {
     font-size: 30px;
     color: whitesmoke;
-  }
-    #header {
-        text-align: center;
-        color:white;
-        text-shadow: 2px 2px lightslategray;
-        padding: 15px;
-    }
-    
-    .namePlate {
-        font-size: 25px;
-        text-align: center;
-        /*padding:5px;*/
-    }
-  
-    .figure {
-        text-align: center;
-        background-color: rgb(255, 235, 205, 0.8);
-        /*border: 2px solid black;*/
-        color: black;
-        padding: 10px;
-       /* width: 500px;*/
-        display: block;
-    }
-  
-   .Pics{
-      height: 300px;
-      width: 300px;
-      margin: auto;
-      display: block;
-      padding: 5px;
-  }
-    
-  .logo {
-    width: 30px;
-  }
+}
 
-  .booksearch {
-    background-color: rgb(119, 136, 153, 0.8);
-    width: 70%;
+#header {
+    text-align: center;
+    color:white;
+    text-shadow: 2px 2px lightslategray;
+    padding: 15px;
+}
+
+.siteName {
+  color: #fff;
+  text-shadow: 2px 2px lightslategray;
+  font-family: "ITC Serif Gothic", Lato;
+  font-size: 1.75em;
+  left: -2em;
+  right: -2em;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
+  
+}
+
+.namePlate {
+    font-size: 25px;
+    text-align: center;
+}
+  
+.figure {
+    text-align: center;
+    background-color: rgb(255, 235, 205, 0.8);
+    /*border: 2px solid black;*/
+    color: black;
+    padding: 10px;
+   /* width: 500px;*/
+    display: block;
+}
+  
+.Pics{
+    height: 300px;
+    width: auto;
+    margin: auto;
+    display: block;
+    padding: 5px;
+}
     
+.logo {
+    width: 30px;
+    margin: 5px;
+}
+
+.booksearch {
+    background-color: rgb(119, 136, 153, 0.8);
+    width: 100%;
+    margin: auto;
+}
+
+  /*#bookSelection {
+    width: 250px;
+  }*/
+
+#submitButton {
+    margin: auto;
+}
+  
+
+  @media only screen and (max-width: 500px) {
+    .Pics {
+      width: 150px;
+    }
   }
