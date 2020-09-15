@@ -2,38 +2,37 @@
 
 $(document).ready(function () {
     var bookBody = document.getElementById('bookBody');
-var submitButton = document.getElementById('submitButton');
-var titleSelection = document.getElementById('titleSelection');
-var authorSelection = document.getElementById('authorSelection');
+    var submitButton = document.getElementById('submitButton');
 
-var cards = document.getElementById("cards");
+    var bookSelection = document.getElementById('bookSelection');
+    var titleSelection = document.getElementById('titleSelection');
+    var authorSelection = document.getElementById('authorSelection');
+
+    var cards = document.getElementById("cards");
 
 
-/// Search for items
-submitButton.addEventListener('click', function () {
-    var bookSelection = document.getElementById('bookSelection').value;
-    if (bookSelection == "") {
-        alert("Please add a book name to search");
-    }
-    else {
-        bookSearch(bookSelection);
-    }
-});
+    /// Search for items
+    submitButton.addEventListener('click', function () {
+        if(bookSelection.value == "" && titleSelection.value == "" && authorSelection.value == "") {
+            alert("Type in a search query");
+        }
+        else {
+            bookSearch;
+            titleSearch;
+            authorSearch;
+        }
+    });
 
-//Search by title
-//titleSelection.addEventListener('search', titleSearch(titleSelection.value));
+    //General book search
+    bookSelection.addEventListener('search', bookSearch)
 
-authorSelection.addEventListener('search', function (event) {
-    console.log(event);
-});
+    //Search by title
+    titleSelection.addEventListener('search', titleSearch);
 
-//submit search value with return key
-bookSelection.addEventListener("keyup", function (event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        document.getElementById("submitButton").click();
-    }
-});
+    //Search by author
+    authorSelection.addEventListener('search', authorSearch);
+
+    
 })
 
 
@@ -41,95 +40,143 @@ bookSelection.addEventListener("keyup", function (event) {
 
 //-------------------FUNCTION------------------------//
 
-function bookSearch(searchString) {
+function bookSearch(event) {
 
-    cards.innerHTML = '';
-    $.get(`http://openlibrary.org/search.json?q=${searchString}`, function (data1) {
-        console.log(data1);
-        for (var j = 0; j < data1.docs.length; j++) {
-            var author = data1.docs[j].author_name;
-            var title = data1.docs[j].title;
-            var publish_date = data1.docs[j].first_publish_year;
-            var isbn = data1.docs[j].isbn[0];
+    event.preventDefault();
 
-            var card = `<div class= "col-sm-3 mb-4">
-            <div class="card h-100 bg-dark text-white" >
-            <img src="http://covers.openlibrary.org/b/isbn/${isbn}-M.jpg" class="card-img-top" alt="${title} cover">
-            <div class="card-body">
-                <h5 class="card-title">${title}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${author}</h6>
-              <p class="card-text">${publish_date}</p>
-            </div>
-          </div>
-          </div>
-                                `
+    if (bookSelection.value == "") {
+        alert("Please type in a book query");
+    }
+    else {
+        cards.innerHTML = '';
+        $.get(`http://openlibrary.org/search.json?q=${bookSelection.value}`)
+            .then( function (data1) {
+            console.log(data1);
+            for (var j = 0; j < data1.docs.length; j++) {
+                let bookCard = buildCard(data1.docs[j]);
 
-            cards.innerHTML += card;
-        }
+                cards.appendChild(bookCard);
+            }
 
-    })
-
-}
-
-function titleSearch(searchString) {
-    if (bookSelection == "") {
-        alert("Please add a book name to search");
+            })
+            .catch(function(error) {
+                console.log(error);
+            })
+        
     }
 
+}
+
+function titleSearch(event) {
+    event.preventDefault();
+
+    if (titleSelection.value == "") {
+        alert("Please type in a book title");
+    }
+    else {
     cards.innerHTML = '';
-    $.get(`http://openlibrary.org/search.json?title=${searchString}`, function (data1) {
+    $.get(`http://openlibrary.org/search.json?title=${titleSearch.value}`)
+        .then( function (data1) {
         console.log(data1);
         for (var j = 0; j < data1.docs.length; j++) {
-            var author = data1.docs[j].author_name;
-            var title = data1.docs[j].title;
-            var publish_date = data1.docs[j].first_publish_year;
-            var isbn = data1.docs[j].isbn[0];
+            let bookCard = buildCard(data1.docs[j]);
 
-            var card = `<div class= "col-sm-3 mb-4">
-            <div class="card h-100 bg-dark text-white" >
-            <img src="http://covers.openlibrary.org/b/isbn/${isbn}-M.jpg" class="card-img-top" alt="${title} cover">
-            <div class="card-body">
-                <h5 class="card-title">${title}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${author}</h6>
-              <p class="card-text">${publish_date}</p>
-            </div>
-          </div>
-          </div>
-                                `
-
-            cards.innerHTML += card;
+            cards.appendChild(bookCard);
         }
 
-    })
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
 
 }
 
-function authorSearch(searchString) {
-
+function authorSearch(event) {
+    event.preventDefault();
+    
+    if(authorSelection.value == '') {
+        alert('Please type in an author');
+        
+    }
+    else {
     cards.innerHTML = '';
-    $.get(`http://openlibrary.org/search.json?author=${searchString}`, function (data1) {
+    $.get(`http://openlibrary.org/search.json?author=${authorSelection.value}`)
+        .then(function (data1) {
         console.log(data1);
         for (var j = 0; j < data1.docs.length; j++) {
-            var author = data1.docs[j].author_name;
-            var title = data1.docs[j].title;
-            var publish_date = data1.docs[j].first_publish_year;
-            var isbn = data1.docs[j].isbn[0];
+            let bookCard = buildCard(data1.docs[j]);
 
-            var card = `<div class= "col-sm-3 mb-4">
-            <div class="card h-100 bg-dark text-white" >
-            <img src="http://covers.openlibrary.org/b/isbn/${isbn}-M.jpg" class="card-img-top" alt="${title} cover">
-            <div class="card-body">
-                <h5 class="card-title">${title}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${author}</h6>
-              <p class="card-text">${publish_date}</p>
-            </div>
-          </div>
-          </div>
-                                `
-
-            cards.innerHTML += card;
+            cards.appendChild(bookCard);
         }
 
-    })
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
 
 }
+
+function buildCard(data) {
+
+    var bookElement = document.createElement('div');
+     bookElement.className = "col-3 mb-4";
+
+    var cardElement = document.createElement('div');
+    cardElement.className = "card h-100 bg-dark text-white";
+
+    var cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+
+    var coverImg = `<img class="card-img-top" src="http://covers.openlibrary.org/b/isbn/${data.isbn[0]}-M.jpg" alt="${data.title} cover">`;
+                                
+                                
+    var bodyHTML =  `<h5 class="card-title">${data.title}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${data.author_name}</h6>
+                    <p class="card-text">${data.first_publish_year}</p>`;
+    
+    var button = document.createElement('button');
+    button.className = "btn btn-success";
+    button.id = data.isbn[0];
+    button.innerHTML = "Save Book";
+
+    button.addEventListener("click", function() {
+
+        alert(this.id);
+    });
+
+    
+                
+    /*Insert string literal into card-body
+    add anchor to bottom of card body*/
+    cardBody.insertAdjacentHTML('beforeend', coverImg);
+    cardBody.insertAdjacentHTML('beforeend', bodyHTML);
+    cardBody.appendChild(button);
+    
+               
+    /*Image is inserted into card element
+    card body is appended to card element*/
+    cardElement.appendChild(cardBody);
+               
+    //Card element is appended to div
+    bookElement.appendChild(cardElement);
+                
+
+    return bookElement;
+}
+
+function fixCoverImage(url) {
+    let imgs = document.getElementsByTagName('img');
+    console.log(imgs);
+    console.log(imgs.length);
+
+    for(var i = 0; i < imgs.length; i++) {
+        if(imgs[i].naturalWidth != 1) {
+            console.log('ok');
+        }
+    }
+}
+
+
+

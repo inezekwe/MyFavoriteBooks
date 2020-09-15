@@ -54,14 +54,33 @@
   <div class="container">
       <div class="siteName"><h2>Search for any book or author</h2></div>
     <div class="row mt-1 mb-2 pt-3 booksearch">
-      <div class="col-12 col-lg-4">
+      <div class="col-3">
         <div class="form-group">
           <input type="search" class="form-control mr-sm-2" id="bookSelection" aria-describedby=""
-            placeholder="Enter A Book or Author">
+            placeholder="Enter A Book" onsubmit="return bookSearch(event);">
+            
+        </div>
+        
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <input type="search" class="form-control mr-sm-2" id="titleSelection" aria-describedby=""
+            placeholder="Search by Title" onsubmit="return titleSearch(event);">
+            
         </div>
       </div>
-      <div class="col-12 col-lg-2">
-        <button type="submit" class="btn btn-outline-success my-2 my-sm-0" id="submitButton">Submit</button>
+
+      <div class="col-3">
+        <div class="form-group">
+         
+          <input type="search" class="form-control mr-sm-2" id="authorSelection" aria-describedby=""
+          placeholder="Search by Author" onsubmit="return authorSearch(event);">
+            
+        </div>
+      </div>
+
+      <div class="col-3">
+        <button type="submit" class="btn btn-success my-2 my-sm-0" id="submitButton">Submit</button>
       </div>
     </div>
 
