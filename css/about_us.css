@@ -35,7 +35,7 @@ body {
   
 .figure {
     text-align: center;
-    background-color: rgb(255, 235, 205, 0.8);
+     background-color: rgba(138, 108, 63, 0.8);
     /*border: 2px solid black;*/
     color: black;
     padding: 10px;
