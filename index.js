@@ -1,56 +1,68 @@
-const express = require('express');
+const express = require("express");
+const { pool } = require("./dbConfig");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+const flash = require("express-flash");
+const session = require("express-session");
+require("dotenv").config();
 const app = express();
-const { pool }  = require('./dbConfig');
-const bcrypt = require ("bcrypt");
-const session = require ('express-session');
-const flash = require ('express-flash');
 
 const PORT = process.env.PORT || 3000;
 
-//Middleware
-//tell app to to use view engine to render EJS files
+const initializePassport = require("./passportConfig");
+
+initializePassport(passport);
+
+// Middleware
+
+// Parses details from a form
+app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
-//Middleware to send from frontend to server
-app.use(express.urlencoded({ extended: false }));
-
-//Encrypt info stored in session
-app.use(session({
-  secret: 'secret',
-//save session variables?
-  resave: false,
-//save session details if no value
-  saveUninitialized: false
-
-})
-
+app.use(
+  session({
+    // Key we want to keep secret which will encrypt all of our information
+    secret: process.env.SESSION_SECRET,
+    // Should we resave our session variables if nothing has changes which we don't
+    resave: false,
+    // Save empty value if there is no value which we do not want to do
+    saveUninitialized: false
+  })
 );
-//display flash messages
+// Function inside passport which initializes passport
+app.use(passport.initialize());
+// Store our variables to be persisted across the whole session. Works with app.use(Session) above
+app.use(passport.session());
 app.use(flash());
 
-//Routes
-app.get('/', (req, res) => {
-  res.render('index')
-
+app.get("/", (req, res) => {
+  res.render("index");
 });
 
-app.get('/users/register', (req, res) => {
-  res.render("register");
+app.get("/users/register", checkAuthenticated, (req, res) => {
+  res.render("register.ejs");
 });
 
-
-app.get('/users/login', (req, res) => {
-  res.render("login");
+app.get("/users/login", checkAuthenticated, (req, res) => {
+  // flash sets a messages variable. passport sets the error message
+  console.log(req.session.flash.error);
+  res.render("login.ejs");
 });
 
-
-app.get('/users/dashboard', (req, res) => {
-  res.render("dashboard", { user: "Rhonda" });
+app.get("/users/dashboard", checkNotAuthenticated, (req, res) => {
+  console.log(req.isAuthenticated());
+  res.render("dashboard", { user: req.user.name });
 });
 
+app.get("/users/logout", (req, res) => {
+  req.logout();
+  res.render("index", { message: "You have logged out successfully" });
+});
 
 app.post("/users/register", async (req, res) => {
-  let { name, email, password, password2} = req.body;
+  let { name, email, password, password2 } = req.body;
+
+  let errors = [];
 
   console.log({
     name,
@@ -59,57 +71,49 @@ app.post("/users/register", async (req, res) => {
     password2
   });
 
-  let errors = [];
-
-  //validation
-  if(!name || !email || !password || !password2){
-    errors.push({ message: "Please enter all fields"});
+  if (!name || !email || !password || !password2) {
+    errors.push({ message: "Please enter all fields" });
   }
 
-  if(password.length < 6){
-    errors.push({message: "Password should be at least 6 characters"});
+  if (password.length < 6) {
+    errors.push({ message: "Password must be a least 6 characters long" });
   }
 
-  if(password != password2) {
-    errors.push({message: "Passwords do not match"});
+  if (password !== password2) {
+    errors.push({ message: "Passwords do not match" });
   }
 
-  if(errors.length > 0){
-    res.render("register", { errors });
-  }else{
-
-    //Form validation has passed
-    let hashedPassword = await bcrypt.hash(password, 10);
+  if (errors.length > 0) {
+    res.render("register", { errors, name, email, password, password2 });
+  } else {
+    hashedPassword = await bcrypt.hash(password, 10);
     console.log(hashedPassword);
-
-    //see if user exist
+    // Validation passed
     pool.query(
-        `SELECT * FROM users 
+      `SELECT * FROM users
         WHERE email = $1`,
-         [email], 
-         (error, results)=> {
-          if (error) {
-            throw error;
-          }
-          console.log(results.rows);
+      [email],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+        }
+        console.log(results.rows);
 
-          if (results.rows.length > 0) {
-            errors.push({ message: "Email already registered"});
-            console.log(errors);
-            res.render("register", { errors });
-          }else{
-            pool.query(
-              `INSERT INTO users (name, email password)
-              VALUES ($1, $2, $3)
-              RETURNING id, password`, 
-              [name, email, hashedPassword], 
-              (err, results)=> {
+        if (results.rows.length > 0) {
+          return res.render("register", {
+            message: "Email already registered"
+          });
+        } else {
+          pool.query(
+            `INSERT INTO users (name, email, password)
+                VALUES ($1, $2, $3)
+                RETURNING id, password`,
+            [name, email, hashedPassword],
+            (error, results) => {
+              if (error) {
                 console.log(error);
-                if (error) {
-                  throw error;
-                }
-              console.log(results.row);
-              req.flash('success_msg', "You are now registered. Please log in")
+              }
+              req.flash("success_msg", "You are now registered. Please log in");
               res.redirect("/users/login");
             }
           );
@@ -119,7 +123,29 @@ app.post("/users/register", async (req, res) => {
   }
 });
 
+app.post(
+  "/users/login",
+  passport.authenticate("local", {
+    successRedirect: "/users/dashboard",
+    failureRedirect: "/users/login",
+    failureFlash: true
+  })
+);
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/dashboard");
+  }
+  next();
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/users/login");
+}
 
 app.listen(PORT, () => {
-  console.log (`Server Up and running ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

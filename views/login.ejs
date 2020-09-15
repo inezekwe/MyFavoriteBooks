@@ -21,6 +21,12 @@
         <% } %>
     </ul>
 
+    <ul>
+        <% if(messages.error) { %>
+            <li><%= messages.error %></li>
+       <% } %>
+    </ul>
+
     <form action="/users/login" method="POST">
 
     <div>
@@ -41,7 +47,7 @@
     </div>
     <div>
         <input 
-        type="submit" value="dashboard"/>
+        type="submit" value="Login"/>
     </div>
     <a href="/users/register">Register</a>
 </form>
