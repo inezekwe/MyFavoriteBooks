@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>About Us</title>
+  <head>
+    <title>About Us</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
     crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>>
+    <link rel="stylesheet" href="css/about_us.css">
   <link href="css/lightbox.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/about_us.css">
+  
   
 </head>
 
@@ -50,19 +50,23 @@
       <h1>Meet Our Stellar Team</h1>
     </div>
 
-<!----START PROFILE PICS----->
+<!----START LIGHTBOX PROFILE PICS----->
     <div class="row">
         <figure class="figure col-6">
-            <div class="row">
+            <div class="row ">
                 <h2 class=" col-6 namePlate">Rhonda Gilliard</h2>
                 <a href="https://www.linkedin.com/in/rhondagilliard/" target="_blank">
                     <img class="logo" alt="Rhonda-LinkedIn" src="images/linkedin.png"> 
+                </a>
+                <a href="https://github.com/RhondieG" target="_blank">
                     <img class="logo" alt="Rhonda-github" src="images/github.png"> 
-                  </a>
+                </a>    
             </div>
-            <img class="Pics" src="https://ca.slack-edge.com/T0569RDC6-UMLPL6HRU-dfab49b57702-512"
-            class="figure-img img-fluid rounded" alt="...">  
-            <figcaption>Database Architect</figcaption>
+            <a href="https://ca.slack-edge.com/T0569RDC6-UMLPL6HRU-dfab49b57702-512" data-lightbox="ourTeam">
+              <img class="Pics" src="https://ca.slack-edge.com/T0569RDC6-UMLPL6HRU-dfab49b57702-512"
+                class="figure-img img-fluid rounded" alt="...">
+              </a>
+            <figcaption>Authentication & Encryption </figcaption>
         </figure>
       
       
@@ -71,61 +75,62 @@
             <h2 class="col-6 namePlate">Jeremy Stegall</h2>
             <a href="https://www.linkedin.com/in/jeremy-stegall-6a0a90b3/" target="_blank">
                 <img class="logo" alt="Jeremy-LinkedIn" src="images/linkedin.png">
+            </a>
+            <a href="https://github.com/JRStegall" target="_blank">
                 <img class="logo" alt="Jeremy-github" src="images/github.png">  
-              </a>
+            </a>
         </div>
-          <img class="Pics" src="images/js.jpg"
-            class="figure-img img-fluid rounded" alt="...">
+        <a href="https://ca.slack-edge.com/T0569RDC6-U0143AXA75F-f4e391b1beb9-512" data-lightbox="ourTeam">
+          <img class="Pics " src="https://ca.slack-edge.com/T0569RDC6-U0143AXA75F-f4e391b1beb9-512"
+          class="figure-img img-fluid rounded" alt="...">
+        </a>
             <figcaption>Styles and Profiles</figcaption>
         </figure>
     </div>
 
     <div class="row">
-        <figure class="figure col-6">
-            <div class="row">
-                <h2 class=" col-6 namePlate">Ifeoma Ezekwe</h2>
-                <a href="http://www.linkedin.com/in/ifeoma-ezekwe-58b560156" target="_blank">
-                    <img class="logo" alt="Ifeoma-LinkedIn" src="images/linkedin.png">
-                    <img class="logo" alt="Ifeoma-github" src="images/github.png">  
-                  </a>
-            </div>
-            <img class="Pics" src=""
-            class="figure-img img-fluid rounded" alt="..."> 
-            <figcaption>Front End Connections</figcaption> 
-        </figure>
-      
-      
+        
         <figure class="figure col-6">
             <div class="row">
             <h2 class="col-6 namePlate">Camille Cooper</h2>
             <a href="">
-                <img class="logo" alt="Camille-LinkedIn" src="images/linkedin.png"> 
+                <img class="logo" alt="Camille-LinkedIn" src="images/linkedin.png">
+            </a>
+            <a href="https://github.com/corencamille" target="_blank">
                 <img class="logo" alt="Camille-github" src="images/github.png"> 
-              </a>
+            </a>
         </div>
-          <img class="Pics" src="https://ca.slack-edge.com/T0569RDC6-U013J0FP9TQ-4790eed9ba1e-512"
-            class="figure-img img-fluid rounded" alt="...">
-            <figcaption>Technical Support</figcaption>
+        <a href="https://ca.slack-edge.com/T0569RDC6-U013J0FP9TQ-4790eed9ba1e-512" data-lightbox="ourTeam">
+          <img class="Pics" src="https://ca.slack-edge.com/T0569RDC6-U013J0FP9TQ-4790eed9ba1e-512" 
+          class="figure-img img-fluid rounded" alt="...">
+        </a>
+            <figcaption>Database Architect</figcaption>
         </figure>
+
+        <figure class="figure col-6">
+          <div class="row">
+              <h2 class=" col-6 namePlate">Ifeoma Ezekwe</h2>
+              <a href="http://www.linkedin.com/in/ifeoma-ezekwe-58b560156" target="_blank">
+                  <img class="logo" alt="Ifeoma-LinkedIn" src="images/linkedin.png">
+              </a>
+              <a href="https://github.com/inezekwe"    target="_blank">
+                  <img class="logo" alt="Ifeoma-github" src="images/github.png">  
+              </a>
+          </div>
+          <img class="Pics" src=""
+          class="figure-img img-fluid rounded" alt="..."> 
+          <figcaption>Front End Connections</figcaption> 
+      </figure>
     </div>
 
-    <!----START LIGHTBOX----->
-    <div class="row">
-    <div class="justify content center">
-        <a href="images/js.jpg" data-lightbox="roadtrip"><img class="Pics" src="images/js.jpg"
-            class="figure-img img-fluid rounded" alt="...">Jeremy Stegall</a>
-        </div>
-        <a href="https://ca.slack-edge.com/T0569RDC6-UMLPL6HRU-dfab49b57702-512"" data-lightbox="roadtrip"><img class="Pics" src="https://ca.slack-edge.com/T0569RDC6-UMLPL6HRU-dfab49b57702-512"
-            class="figure-img img-fluid rounded" alt="...">Rhonda Gilliard</a>
-        <a href="images/image-4.jpg" data-lightbox="roadtrip"><img class="Pics" src="https://ca.slack-edge.com/T0569RDC6-U013J0FP9TQ-4790eed9ba1e-512" class="figure-img img-fluid rounded" alt="...">Camille Cooper</a>
-    </div>
- </div>
+
+  
 
 
 
 <!-----START SCRIPT---->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        
         crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -133,8 +138,8 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-      <script src="about_us.js"></script>
-      <script src="lightbox.js"></script>
+      
+      <script src="js/lightbox.js"></script>
 </body>
 
 

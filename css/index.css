@@ -1,6 +1,7 @@
 /* General styles and layout */
 body {
     background-color: black;
+    
   }
 
 
@@ -8,7 +9,7 @@ body {
     background-image: url("../images/books.jpeg");
     text-shadow: 2px 1px gray;
     margin: 2% 0;
-    width: 100%
+    width: 100%;
   }
 
   .siteName {
