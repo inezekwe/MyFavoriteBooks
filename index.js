@@ -45,7 +45,7 @@ app.get("/users/register", checkAuthenticated, (req, res) => {
 
 app.get("/users/login", checkAuthenticated, (req, res) => {
   // flash sets a messages variable. passport sets the error message
-  console.log(req.session.flash.error);
+  //console.log(req.session.flash.error);
   res.render("login.ejs");
 });
 
