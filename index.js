@@ -6,6 +6,8 @@ const flash = require("express-flash");
 const session = require("express-session");
 require("dotenv").config();
 const app = express();
+const path = require('path');
+const router = express.Router();
 
 const PORT = process.env.PORT || 3000;
 
@@ -14,6 +16,8 @@ const initializePassport = require("./passportConfig");
 initializePassport(passport);
 
 // Middleware
+
+app.use(express.static(path.join(__dirname, "public")));
 
 // Parses details from a form
 app.use(express.urlencoded({ extended: false }));
@@ -39,6 +43,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+
 app.get("/users/register", checkAuthenticated, (req, res) => {
   res.render("register.ejs");
 });
@@ -56,6 +61,7 @@ app.get("/users/dashboard", checkNotAuthenticated, (req, res) => {
 
 app.get("/users/logout", (req, res) => {
   req.logout();
+  console.log('logout');
   res.render("index", { message: "You have logged out successfully" });
 });
 

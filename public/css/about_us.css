@@ -1,3 +1,5 @@
+
+
 body {
     background-image: url(../images/books.jpeg);
     font-family: "ITC Serif Gothic", Lato;
@@ -62,9 +64,10 @@ body {
     margin: auto;
 }
 
-  /*#bookSelection {
-    width: 250px;
-  }*/
+.form-group {
+    background-color: rgb(245, 245, 220, 0.8);
+    padding-left: 2%;
+}
 
 #submitButton {
     margin: auto;

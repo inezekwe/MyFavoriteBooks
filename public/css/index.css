@@ -4,14 +4,30 @@ body {
     
   }
 
+  .btn {
+    background-color: blanchedalmond;
+  }
 
   .header{
     background-image: url("../images/books.jpeg");
-    text-shadow: 2px 1px gray;
-    margin: 2% 0;
-    width: 100%;
+    text-align: center;
+    color: #fff;
+    padding-bottom: 2%;
+    margin: auto;
+    margin-top: 5%;
+    width: 80%;
   }
 
+  .reg {
+    text-shadow: 2px 1px gray;
+  }
+
+  .form {
+    background-color: azure;
+    width: 220px;
+    margin: auto;
+    padding-top: 2%;
+  }
   .siteName {
     position: absolute;
     color: #fff;
