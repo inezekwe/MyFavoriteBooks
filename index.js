@@ -211,11 +211,11 @@ app.post('/users/add_comment', checkNotAuthenticated, (req, res) => {
   pool.query(`UPDATE faves SET comments='${comment}' WHERE user_id=${req.user.id} AND isbn='${isbn}'`)
     .then((results) => {
       console.log(results);
-      res.send('Entry saved');
+      res.redirect("/users/login");
     })
     .catch((error) => {
       console.log(error);
-      res.send('Entry could not be saved');
+      res.end();
     })
 });
 

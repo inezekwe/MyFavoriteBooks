@@ -63,6 +63,7 @@ function bookSearch(event) {
         
     }
 
+
 }
 
 function titleSearch(event) {
@@ -105,8 +106,9 @@ function authorSearch(event) {
 
             cards.appendChild(bookCard);
         }
-
+         $(document).ready()
         })
+
         
     }
 

@@ -19,7 +19,7 @@
     <title>Dashboard</title>
 </head>
 <body>
-  <container>
+  
   
     <nav class="nav-wrapper navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
@@ -48,14 +48,28 @@
 
   
   
-    
+      <div class="container">
       <div class="row" id="bookShelf">
+      </div>
+
+        <!-- Modal Structure -->
+        <div class="row"></div>
+        <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Diary Entry</h4>
+          <p id="diaryEntry"></p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div></div>
+          
       </div>
     
     
-  </container>
+  
      <!--JavaScript at end of body for optimized loading-->
-     <script type="text/javascript" src="/js/materialize.js"></script>
+     <script type="text/javascript" src="/js/materialize.min.js"></script>
      <script type="text/javascript" src="/js/dashboard.js"></script>
 </body>
 </html>
