@@ -1,39 +1,17 @@
 /* General styles and layout */
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
-
 body {
     background-color: black;
-    font-family: "Lora";
-    letter-spacing: 0.2em;
     
   }
 
-  .btn {
-    background-color: blanchedalmond;
-  }
 
   .header{
     background-image: url("../images/books.jpeg");
-    text-align: center;
-    color: #fff;
-    padding-bottom: 2%;
-    margin: auto;
-    margin-top: 5%;
-    width: 80%;
-  }
-
-  .reg {
-    font-family: "Lora";
-    letter-spacing: 0.2em;
     text-shadow: 2px 1px gray;
+    margin: 2% 0;
+    width: 100%;
   }
 
-  .form {
-    background-color: azure;
-    width: 220px;
-    margin: auto;
-    padding-top: 2%;
-  }
   .siteName {
     position: absolute;
     color: #fff;

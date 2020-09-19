@@ -7,7 +7,6 @@ const session = require("express-session");
 require("dotenv").config();
 const app = express();
 const path = require('path');
-const router = express.Router();
 
 const PORT = process.env.PORT || 3000;
 
@@ -43,14 +42,13 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-
 app.get("/users/register", checkAuthenticated, (req, res) => {
   res.render("register.ejs");
 });
 
 app.get("/users/login", checkAuthenticated, (req, res) => {
   // flash sets a messages variable. passport sets the error message
-  //console.log(req.session.flash.error);
+  console.log(req.session.flash.error);
   res.render("login.ejs");
 });
 
@@ -61,7 +59,6 @@ app.get("/users/dashboard", checkNotAuthenticated, (req, res) => {
 
 app.get("/users/logout", (req, res) => {
   req.logout();
-  console.log('logout');
   res.render("index", { message: "You have logged out successfully" });
 });
 
@@ -137,6 +134,104 @@ app.post(
     failureFlash: true
   })
 );
+
+//Checks to see if book is already saved then saves book's ISBN to user's account
+app.post('/users/save_book', checkNotAuthenticated, (req, res) => {
+   let isbn = req.body.isbn;
+
+   if(isbn) {
+     pool.query(`SELECT isbn FROM faves WHERE user_id=${req.user.id} AND isbn='${isbn}'`)
+        .then((response) => {
+          console.log(response);
+          if(response.rowCount == 0) {
+
+            pool.query(`INSERT INTO faves(user_id, isbn) VALUES (${req.user.id}, '${isbn}')`)
+              .then((results) => {
+                console.log(results);
+                res.send('Book saved successfully');
+              })
+              .catch((error) => {
+                console.log(error);
+                res.send("Could not save book");
+              })
+
+          }
+          else {
+            res.send("Book already saved");
+          }
+        })
+     
+   }
+   else {
+      res.send("Enter ISBN number");
+   }
+});
+
+//Gets all the saved books linked to a user
+app.get('/users/save_book', checkNotAuthenticated, (req, res) => {
+
+    pool.query(`SELECT isbn FROM faves WHERE user_id=${req.user.id}`)
+     .then((results) => {
+       console.log(results);
+       res.json(results.rows);
+     })
+     .catch((error) => {
+       console.log(error);
+       res.send("Could not retrieve bookshelf");
+     })
+  
+});
+
+//Deletes a book from user's account
+app.delete('/users/remove_book/:isbn', checkNotAuthenticated, (req, res) => {
+  let isbn = req.params.isbn;
+  
+  if(isbn) {
+    pool.query(`DELETE FROM faves WHERE isbn='${isbn}' AND user_id=${req.user.id}`)
+    .then((results) => {
+      console.log(results);
+      res.json(results.rowCount);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.send("Could not remove book");
+    })
+
+  }
+  
+  res.send("Enter ISBN number");
+
+});
+
+//Adds a comment or diary entry to book on user's account
+app.post('/users/add_comment', checkNotAuthenticated, (req, res) => {
+  let comment = req.body.comment;
+  let isbn = req.body.isbn;
+
+  pool.query(`UPDATE faves SET comments='${comment}' WHERE user_id=${req.user.id} AND isbn='${isbn}'`)
+    .then((results) => {
+      console.log(results);
+      res.send('Entry saved');
+    })
+    .catch((error) => {
+      console.log(error);
+      res.send('Entry could not be saved');
+    })
+});
+
+//Gets diary entry of book from user's account
+app.get('/users/comments/:isbn', checkNotAuthenticated, (req, res) => {
+  let isbn = req.params.isbn;
+  pool.query(`SELECT comments FROM faves WHERE user_id=${req.user.id} AND isbn='${isbn}'`)
+    .then((results) => {
+      console.log(results);
+      res.json(results.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.send('Could not retrieve diary entry');
+    })
+});
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

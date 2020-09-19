@@ -1,9 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
-
 body {
     background-image: url(../images/books.jpeg);
-    font-family: "Lora";
-    letter-spacing: 0.2em;
+    font-family: "ITC Serif Gothic", Lato;
   }
 
 #siteName {
@@ -60,15 +57,14 @@ body {
 }
 
 .booksearch {
-    background-color: #424242;
+    background-color: rgb(119, 136, 153, 0.8);
     width: 100%;
     margin: auto;
 }
 
-.form-group {
-    background-color:  #424242;
-    padding-left: 2%;
-}
+  /*#bookSelection {
+    width: 250px;
+  }*/
 
 #submitButton {
     margin: auto;

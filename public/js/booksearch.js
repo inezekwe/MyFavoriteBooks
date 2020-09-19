@@ -59,9 +59,7 @@ function bookSearch(event) {
             }
 
             })
-            .catch(function(error) {
-                console.log(error);
-            })
+            
         
     }
 
@@ -85,9 +83,7 @@ function titleSearch(event) {
         }
 
         })
-        .catch(function (error) {
-            console.log(error);
-        })
+        
     }
 
 }
@@ -111,9 +107,7 @@ function authorSearch(event) {
         }
 
         })
-        .catch(function (error) {
-            console.log(error);
-        })
+        
     }
 
 }
@@ -137,13 +131,19 @@ function buildCard(data) {
                     <p class="card-text">${data.first_publish_year}</p>`;
     
     var button = document.createElement('button');
-    button.className = "btn btn-success";
+    button.className = "btn btn-warning";
     button.id = data.isbn[0];
     button.innerHTML = "Save Book";
 
     button.addEventListener("click", function() {
 
-        alert(this.id);
+        $.post('/users/save_book', {"isbn": this.id})
+            .then(function(response) {
+                alert(response);
+            })
+            .catch(function(error) {
+                alert(error);
+            })
     });
 
     
