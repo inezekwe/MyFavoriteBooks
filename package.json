@@ -4,12 +4,16 @@
   "description": "Full Stack Group Project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JRStegall/FullStackProject.git"
+  },
+  "engines": {
+    "node": "12.17.0",
+    "npm": "6.14.4"
   },
   "author": "",
   "license": "ISC",
