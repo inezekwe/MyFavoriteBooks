@@ -1,5 +1,5 @@
 const express = require("express");
-const { pool } = require("./dbConfig");
+const { pool } = require("./dbconfig.js");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const flash = require("express-flash");
@@ -10,7 +10,7 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 
-const initializePassport = require("./passportConfig");
+const initializePassport = require("./passportConfig.js");
 
 initializePassport(passport);
 
