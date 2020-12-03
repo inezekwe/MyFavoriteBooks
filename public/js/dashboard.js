@@ -43,7 +43,7 @@ function buildCard(data) {
 
   let cardImg = document.createElement('div');
   cardImg.className = 'card-image waves-effect waves-block waves-light';
-  cardImg.innerHTML = `<img class="activator" src="http://covers.openlibrary.org/b/isbn/${data}-M.jpg">`;
+  cardImg.innerHTML = `<img class="activator" src="https://covers.openlibrary.org/b/isbn/${data}-M.jpg">`;
 
   
   let cardReveal = document.createElement('div');

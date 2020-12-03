@@ -49,7 +49,7 @@ function bookSearch(event) {
     }
     else {
         cards.innerHTML = '';
-        $.get(`http://openlibrary.org/search.json?q=${bookSelection.value}`)
+        $.get(`https://openlibrary.org/search.json?q=${bookSelection.value}`)
             .then( function (data1) {
             console.log(data1);
             for (var j = 0; j < data1.docs.length; j++) {
@@ -74,7 +74,7 @@ function titleSearch(event) {
     }
     else {
     cards.innerHTML = '';
-    $.get(`http://openlibrary.org/search.json?title=${titleSearch.value}`)
+    $.get(`https://openlibrary.org/search.json?title=${titleSearch.value}`)
         .then( function (data1) {
         console.log(data1);
         for (var j = 0; j < data1.docs.length; j++) {
@@ -98,7 +98,7 @@ function authorSearch(event) {
     }
     else {
     cards.innerHTML = '';
-    $.get(`http://openlibrary.org/search.json?author=${authorSelection.value}`)
+    $.get(`https://openlibrary.org/search.json?author=${authorSelection.value}`)
         .then(function (data1) {
         console.log(data1);
         for (var j = 0; j < data1.docs.length; j++) {
@@ -125,7 +125,7 @@ function buildCard(data) {
     var cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 
-    var coverImg = `<img class="card-img-top" src="http://covers.openlibrary.org/b/isbn/${data.isbn[0]}-M.jpg" alt="${data.title} cover">`;
+    var coverImg = `<img class="card-img-top" src="https://covers.openlibrary.org/b/isbn/${data.isbn[0]}-M.jpg" alt="${data.title} cover">`;
                                 
                                 
     var bodyHTML =  `<h5 class="card-title">${data.title}</h5>
