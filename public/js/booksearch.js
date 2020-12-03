@@ -100,7 +100,7 @@ function authorSearch(event) {
     cards.innerHTML = '';
     $.get(`https://openlibrary.org/search.json?author=${authorSelection.value}`)
         .then(function (data1) {
-        console.log(data1);
+        //console.log(data1);
         for (var j = 0; j < data1.docs.length; j++) {
             let bookCard = buildCard(data1.docs[j]);
 

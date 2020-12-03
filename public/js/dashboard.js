@@ -13,14 +13,14 @@ function getSavedBooks () {
     fetch('/users/save_book', {method: 'GET'})
         .then(function(response) {
             if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
+                alert('Looks like there was a problem. Status Code: ' +
                 response.status);
                 return;
             }
 
 
             response.json().then(function (data) {
-                console.log(data);
+                //console.log(data);
                 for(let i = 0; i < data.length; i++) {
                     let bookCard = buildCard(data[i].isbn);
 
@@ -29,7 +29,7 @@ function getSavedBooks () {
             })
         })
         .catch(function (error) {
-            console.log(error)
+            alert(error);
         }) 
 }
 
@@ -68,7 +68,7 @@ function buildCard(data) {
       }
       })
       .catch(function (error) {
-        console.log('Looks like there was a problem. Status Code: ' +
+        alert('Looks like there was a problem. Status Code: ' +
         response.status);
       })
   })
@@ -83,7 +83,7 @@ function buildCard(data) {
       .then((response) => {
         if (response.status == 200) {
           response.json().then(function (data) {
-            console.log(data[0].comments);
+            //console.log(data[0].comments);
             diaryEntry.innerHTML = data[0].comments;
           })
       }
